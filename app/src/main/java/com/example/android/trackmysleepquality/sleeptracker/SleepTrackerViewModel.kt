@@ -17,14 +17,11 @@
 package com.example.android.trackmysleepquality.sleeptracker
 
 import android.app.Application
-import android.content.res.Resources
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import com.example.android.trackmysleepquality.database.SleepDatabaseDao
 import com.example.android.trackmysleepquality.database.SleepNight
-import com.example.android.trackmysleepquality.formatNights
 import kotlinx.coroutines.*
 
 
@@ -44,10 +41,18 @@ class SleepTrackerViewModel(
 
         val sleepRecords : LiveData<List<SleepNight>>
                 get() = database.getAllNights()
-
+        /*
         val sleepRecordsString = Transformations.map(sleepRecords){
                 nights -> formatNights(nights, application.resources)
         }
+*/
+        private var _startButtonVisibility = MutableLiveData<Boolean>()
+        val startButtonVisibility : LiveData<Boolean>
+        get() = _startButtonVisibility
+
+        private var _stopButtonVisibility = MutableLiveData<Boolean>()
+        val stopButtonVisibility : LiveData<Boolean>
+                get() = _stopButtonVisibility
 
         private val _sleepFinished = MutableLiveData<Boolean>()
         val sleepFinished: LiveData<Boolean>
@@ -60,6 +65,8 @@ class SleepTrackerViewModel(
 
          init {
              _sleepFinished.value = false
+                 _startButtonVisibility.value = true
+                 _stopButtonVisibility.value = false
          }
 
         fun doneShowingSnackbar() {
@@ -69,6 +76,8 @@ class SleepTrackerViewModel(
                 if (_sleepRecord.value == null) {
                         val currentTime = System.currentTimeMillis()
                         val night = SleepNight(sleepTimeInMillis = currentTime)
+                        _startButtonVisibility.value = false
+                        _stopButtonVisibility.value = true
                         coroutineScope.launch {
                                 _sleepRecord.value = asyncStartSleep(night)
                         }
@@ -87,6 +96,8 @@ class SleepTrackerViewModel(
 
         fun stopSleep(){
                 val currentTime = System.currentTimeMillis()
+                _startButtonVisibility.value = true
+                _stopButtonVisibility.value = false
                 coroutineScope.launch {
                         var oldNight =  _sleepRecord.value ?: return@launch
                         oldNight.wakeupTimeInMillis = currentTime
@@ -116,4 +127,5 @@ class SleepTrackerViewModel(
                 database.clearAll()
         }
 }
+
 

@@ -29,7 +29,7 @@ class SleepNightAdapter: RecyclerView.Adapter<TextItemViewHolder>() {
             3 -> R.drawable.ic_sleep_3
             4 -> R.drawable.ic_sleep_4
             5 -> R.drawable.ic_sleep_5
-            else -> R.drawable.ic_sleep_5
+            else -> R.drawable.ic_launcher_sleep_tracker_foreground
         }
 
         )

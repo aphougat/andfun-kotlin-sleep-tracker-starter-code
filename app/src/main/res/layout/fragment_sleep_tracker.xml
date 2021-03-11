@@ -23,6 +23,7 @@
          the whole ViewModel, so that we can access the LiveData,
          click handlers, and state variables. -->
     <data>
+        <import type="android.view.View"/>
 <variable
     name="viewModel"
     type="com.example.android.trackmysleepquality.sleeptracker.SleepTrackerViewModel" />
@@ -63,6 +64,7 @@
             android:onClick="@{() -> viewModel.startSleep()}"
             android:layout_marginStart="@dimen/margin"
             android:text="@string/start"
+            android:visibility="@{viewModel.startButtonVisibility ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBaseline_toBaselineOf="@id/stop_button"
             app:layout_constraintEnd_toStartOf="@+id/stop_button"
             app:layout_constraintHorizontal_chainStyle="spread"
@@ -73,6 +75,7 @@
             style="@style/SleepButtons"
             android:layout_width="wrap_content"
             android:onClick="@{() -> viewModel.stopSleep()}"
+            android:visibility="@{viewModel.stopButtonVisibility ? View.VISIBLE : View.INVISIBLE}"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin"
             android:layout_marginEnd="@dimen/margin"
