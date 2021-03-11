@@ -73,7 +73,7 @@ class SleepTrackerFragment : Fragment() {
         val adapter = SleepNightAdapter()
         binding.sleeplist.adapter = adapter
         //adapter.data = viewModel.sleepRecords.value!!
-        viewModel.sleepRecords.observe(viewLifecycleOwner, Observer { list -> adapter.data = list })
+        viewModel.sleepRecords.observe(viewLifecycleOwner, Observer { list -> adapter.submitList( list) })
         binding.viewModel = viewModel
         return binding.root
     }
