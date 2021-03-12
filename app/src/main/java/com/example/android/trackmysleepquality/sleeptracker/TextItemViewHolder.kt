@@ -25,7 +25,8 @@ class TextItemViewHolder private constructor(val binding: ListItemSleepNightBind
     }
 
     fun bind(
-        item: SleepNight
+        item: SleepNight,
+        clickListener: SleepNightListener
     ) {
 
         /*binding.qualityImage.setImageResource(
@@ -45,6 +46,7 @@ class TextItemViewHolder private constructor(val binding: ListItemSleepNightBind
 
 
         binding.sleepNight = item
+        binding.clickListener = clickListener
         binding.executePendingBindings()
     }
 
