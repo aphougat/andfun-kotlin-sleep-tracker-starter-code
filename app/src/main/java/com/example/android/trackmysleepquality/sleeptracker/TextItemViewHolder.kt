@@ -25,10 +25,10 @@ class TextItemViewHolder private constructor(val binding: ListItemSleepNightBind
     }
 
     fun bind(
-        item: SleepNight,
-        res: Resources
+        item: SleepNight
     ) {
-        binding.qualityImage.setImageResource(
+
+        /*binding.qualityImage.setImageResource(
             when (item.sleepQuality) {
                 0 -> R.drawable.ic_sleep_0
                 1 -> R.drawable.ic_sleep_1
@@ -41,7 +41,11 @@ class TextItemViewHolder private constructor(val binding: ListItemSleepNightBind
 
         )
         binding.qualityString.text = convertNumericQualityToString(item.sleepQuality, res)
-        binding.sleepLength.text = convertLongToDateString(item.nightId)
+        binding.sleepLength.text = convertLongToDateString(item.nightId)*/
+
+
+        binding.sleepNight = item
+        binding.executePendingBindings()
     }
 
 }
