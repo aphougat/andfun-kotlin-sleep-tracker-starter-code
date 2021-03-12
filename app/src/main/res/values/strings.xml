@@ -57,5 +57,6 @@
     <string name="day_string">Wednesday</string>
     <string name="sleep_quality_string">Excellent!!</string>
     <string name="image_desc_string">TODO</string>
+    <string name="header_text">Sleep Results</string>
 
 </resources>
